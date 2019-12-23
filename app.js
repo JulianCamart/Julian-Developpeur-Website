@@ -1,10 +1,13 @@
-TESTING = {
-    PLAYER: 'assets/img/Ninja.png'
-}
+const ASSETS = {
+    name: 'santa',
+    png: 'assets/img/NPC_142.png',
+    heightFrame: 56,
+    widthFrame: 40
+};
 
 const config = {
-    width: 500,
-    height: 300,
+    width: 800,
+    height: 600,
     type: Phaser.AUTO,
     physics: {
         default: 'arcade',
@@ -19,32 +22,109 @@ const config = {
         create: create,
         update: update
     }
-}
+};
 
-let player, cursors;
+let player, cursors, sprite;
+var isTurnRight = true;
+var isTurnLeft = false;
 
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.image('player', TESTING.PLAYER);
+    //Add spriteSheet as config object namev(santa)
+    this.load.spritesheet(ASSETS.name,
+        ASSETS.png,
+        {
+            frameWidth: ASSETS.widthFrame,
+            frameHeight: ASSETS.heightFrame
+        }
+    );
 }
 
 function create() {
-    player = this.physics.add.image(100, 100, 'player');
-    player.body.collideWorldBounds = true;
+    player = this.physics.add.sprite(10, 500, ASSETS.name);
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+    this.anims.create({
+        key: 'waitRight',
+        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 0, end: 0 }),
+        frameRate: 1
+    });
+
+    this.anims.create({
+        key: 'waitLeft',
+        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 18, end: 18 }),
+        frameRate: 1
+    });
+
+    this.anims.create({
+        key: 'walkRight',
+        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 4, end: 17 }),
+        frameRate: 22,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'walkLeft',
+        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 22, end: 35 }),
+        frameRate: 22,
+        repeat: -1
+    });
+
+
+    //TODO Better animation when jump (is bugged)
+
+    this.anims.create({
+        key: 'jumpRight',
+        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 0, end: 3 }),
+        frameRate: 6,
+        yoyo: true,
+        repeat: 0
+    });
+
+    this.anims.create({
+        key: 'jumpLeft',
+        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 18, end: 21 }),
+        frameRate: 6,
+        yoyo: true,
+        repeat: 0
+    });
 
     cursors = this.input.keyboard.createCursorKeys();
 }
 
 function update() {
-    player.setVelocityX(0);
-    if(cursors.up.isDown) {
-        player.setVelocity(0, -250);
-    }
     if(cursors.left.isDown) {
-        player.setVelocity(-100, 0);
+        player.setVelocity(-125, 0);
+        player.anims.play('walkLeft', true);
+        isTurnLeft = true;
+        isTurnRight = false;
     }
-    if(cursors.right.isDown) {
-        player.setVelocity(100, 0);
+    else if(cursors.right.isDown) {
+        player.setVelocity(125, 0);
+        player.anims.play('walkRight', true);
+        isTurnRight = true;
+        isTurnLeft = false;
+    }
+    else {
+        player.setVelocityX(0);
+        if(isTurnRight) {
+            player.anims.play('waitRight', true);
+        }
+        else if(isTurnLeft) {
+            player.anims.play('waitLeft', true);
+        }
+    }
+
+    if(cursors.up.isDown) {
+        //Check for a better way to do jump event
+        player.setVelocity(0, -200);
+        if(isTurnRight) {
+            player.anims.play('jumpRight', true);
+        }
+        else if(isTurnLeft) {
+            player.anims.play('jumpLeft', true);
+        }
     }
 }

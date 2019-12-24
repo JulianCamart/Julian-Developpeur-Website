@@ -31,7 +31,7 @@ var isTurnLeft = false;
 var game = new Phaser.Game(config);
 
 function preload() {
-    //Add spriteSheet as config object namev(santa)
+    //Add spriteSheet as config object name(santa)
     this.load.spritesheet(ASSETS.name,
         ASSETS.png,
         {
@@ -43,6 +43,7 @@ function preload() {
 
 function create() {
     player = this.physics.add.sprite(10, 500, ASSETS.name);
+    player.setScale(2);
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
@@ -75,21 +76,21 @@ function create() {
 
     //TODO Better animation when jump (is bugged)
 
-    this.anims.create({
-        key: 'jumpRight',
-        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 0, end: 3 }),
-        frameRate: 6,
-        yoyo: true,
-        repeat: 0
-    });
+    // this.anims.create({
+    //     key: 'jumpRight',
+    //     frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 0, end: 3 }),
+    //     frameRate: 6,
+    //     yoyo: true,
+    //     repeat: -1
+    // });
 
-    this.anims.create({
-        key: 'jumpLeft',
-        frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 18, end: 21 }),
-        frameRate: 6,
-        yoyo: true,
-        repeat: 0
-    });
+    // this.anims.create({
+    //     key: 'jumpLeft',
+    //     frames: this.anims.generateFrameNumbers(ASSETS.name, { start: 18, end: 21 }),
+    //     frameRate: 6,
+    //     yoyo: true,
+    //     repeat: -1
+    // });
 
     cursors = this.input.keyboard.createCursorKeys();
 }
@@ -117,14 +118,15 @@ function update() {
         }
     }
 
-    if(cursors.up.isDown) {
-        //Check for a better way to do jump event
-        player.setVelocity(0, -200);
-        if(isTurnRight) {
-            player.anims.play('jumpRight', true);
-        }
-        else if(isTurnLeft) {
-            player.anims.play('jumpLeft', true);
-        }
-    }
+    //NEED DEBUG TO FIND A SOLUTION
+    // if(cursors.up.isDown) {
+    //     //Check for a better way to do jump event
+    //     player.setVelocity(0, -200);
+    //     if(isTurnRight) {
+    //         player.anims.play('jumpRight', true);
+    //     }
+    //     else if(isTurnLeft) {
+    //         player.anims.play('jumpLeft', true);
+    //     }
+    // }
 }

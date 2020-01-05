@@ -1,17 +1,27 @@
 {
-    "name": "Phaser-cv-game",
-    "version": "1.0.0",
-    "description": "Using modules",
-    "main": "index.html",
-    "scripts": {
-      "start": "parcel index.html --open",
-      "build": "parcel build index.html"
-    },
-    "dependencies": {
-      "phaser": "3.14.0"
-    },
-    "devDependencies": {
-      "parcel-bundler": "^1.6.1"
-    },
-    "keywords": []
-  }
+  "name": "julian-developpeur-website",
+  "version": "1.0.0",
+  "description": "A little game to show my \"experience\" for the employeur",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "phaser": "3.14.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.6.1"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulianCamart/Julian-Developpeur-Website.git"
+  },
+  "author": "Julian Camart Julian.camart@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulianCamart/Julian-Developpeur-Website/issues"
+  },
+  "homepage": "https://github.com/JulianCamart/Julian-Developpeur-Website#readme"
+}

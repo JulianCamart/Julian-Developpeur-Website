@@ -15,17 +15,19 @@ export default class SceneMain extends Phaser.Scene {
             }
           );
           //TODO
-          this.load.image(
-            "tiles",
-            "../assets/tilesets/0x72-industrial-tileset-32px-extruded.png"
-          );
-          this.load.tilemapTiledJSON(
-            "map",
-            "../assets/map/map.json"
-          );
+          // this.load.image(
+          //   "tiles",
+          //   "../assets/tilesets/0x72-industrial-tileset-32px-extruded.png"
+          // );
+          // this.load.tilemapTiledJSON(
+          //   "map",
+          //   "../assets/map/map.json"
+          // );
           
     }
     create() {
+
+      this.player = new Player(this, 10, 10);
         
     }
 

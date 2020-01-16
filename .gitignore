@@ -1,2 +1,6 @@
 AllSprites/
 AllBetterSprites/
+node_modules
+.cache
+dist
+yarn.lock

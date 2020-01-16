@@ -5,10 +5,10 @@ import SceneMain from "./sceneMain";
 
 const config = {
   type: Phaser.AUTO,
-  width: 800,
+  width: 1024,
   height: 600,
   parent: "game-container",
-  pixelArt: false,
+  pixelArt: true,
   backgroundColor: "#1d212d",
   scene: SceneMain,
   physics: {
